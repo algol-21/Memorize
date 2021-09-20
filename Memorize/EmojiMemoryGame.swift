@@ -29,9 +29,7 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     func newGame() {
-        // *****
         themeIndex = newRandomThemeIndex()
-        // *****
         (theme, model) = EmojiMemoryGame.generateNewGame(themeIndex: themeIndex)
     }
     
