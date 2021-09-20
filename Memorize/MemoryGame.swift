@@ -58,6 +58,14 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     struct Card: Identifiable {
         var isFaceUp = false
         {
+            didSet {
+                if isFaceUp {
+                    startUsingBonusTime()
+                } else {
+                    stopUsingBonusTime()
+                }
+            }
+            
             willSet {
                 if isFaceUp && !newValue && !isMatched {
                     wasFlipped = true
@@ -65,7 +73,13 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             }
         }
         
-        var isMatched = false
+        var isMatched = false {
+            didSet {
+                stopUsingBonusTime()
+            }
+        }
+        
+        
         var wasFlipped = false
         var content: CardContent
         var id: Int
